@@ -1,0 +1,194 @@
+<!--
+  Generated template for the MyInfoModalPage page.
+
+  See http://ionicframework.com/docs/components for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar color="twitter">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="back();">
+        <ion-icon name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>General Information</ion-title>
+    <ion-buttons right>
+      <button ion-button (click)="submit(userData.name, userData.course, userData.age, userData.gender, userData.religion,
+        userData.place_birth, userData.addr, userData.cp_num, userData.mother_name, userData.mother_religion, userData.mother_job,
+       userData.father_name, userData.father_religion, userData.father_job, userData.study_status,
+       userData.transpo, userData.hobby, userData.study_helper, userData.year)">SAVE</button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+  <div *ngIf="userData">
+    <ion-list>
+      <ion-item-group>
+        <ion-item>
+          <ion-label floating>Full Name</ion-label>
+          <ion-input [(ngModel)]="userData.name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Age</ion-label>
+          <ion-input type="number" maxlength="3" [(ngModel)]="userData.age"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Religion</ion-label>
+          <ion-input [(ngModel)]="userData.religion"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Place of Birth</ion-label>
+          <ion-input [(ngModel)]="userData.place_birth"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Home Address</ion-label>
+          <ion-textarea [(ngModel)]="userData.addr"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Contact No.</ion-label>
+          <ion-input type="number" [(ngModel)]="userData.cp_num"></ion-input>
+        </ion-item>
+
+
+      </ion-item-group>
+      <ion-item-divider color="light"></ion-item-divider>
+      <ion-item-group>
+
+        <ion-item>
+          <ion-label>Year Level</ion-label>
+          <ion-select placeholder="Year Level" [(ngModel)]="userData.year">
+            <ion-option *ngFor="let maYear of yearLevel" value="{{maYear}}">{{maYear}}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Course</ion-label>
+          <ion-select placeholder="Course" [(ngModel)]="userData.course">
+            <ion-option *ngFor="let course of courses" value="{{course}}">{{course}}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Gender</ion-label>
+          <ion-select placeholder="Gender" [(ngModel)]="userData.gender">
+            <ion-option value="female">Female</ion-option>
+            <ion-option value="male">Male</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>How is your studies?</ion-label>
+          <ion-select placeholder="How is your studies?" [(ngModel)]="userData.study_status">
+            <ion-option value="very good">Very Good</ion-option>
+            <ion-option value="good">Good</ion-option>
+            <ion-option value="not so good">Not so good</ion-option>
+            <ion-option value="bad">Bad</ion-option>
+          </ion-select>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label>How do you go to school?</ion-label>
+          <ion-select placeholder="How do you go to school?" [(ngModel)]="userData.transpo">
+            <ion-option value="walking">Walking</ion-option>
+            <ion-option value="jeepney">Jeepney</ion-option>
+            <ion-option value="tricycle">Tricycle</ion-option>
+            <ion-option value="car">Car</ion-option>
+          </ion-select>
+        </ion-item>
+
+      </ion-item-group>
+
+      <ion-item-divider color="light"></ion-item-divider>
+      <ion-item-group>
+        <ion-item>
+          <ion-label floating>Mother's Name</ion-label>
+          <ion-input placeholder="Name" [(ngModel)]="userData.mother_name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Mother's Religion</ion-label>
+          <ion-input placeholder="Religion" [(ngModel)]="userData.mother_religion"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Mother's Occupation</ion-label>
+          <ion-input placeholder="Occupation" [(ngModel)]="userData.mother_job"></ion-input>
+        </ion-item>
+      </ion-item-group>
+
+      <ion-item-divider color="light"></ion-item-divider>
+
+      <ion-item-group>
+        <ion-item>
+          <ion-label floating>Father's Name</ion-label>
+          <ion-input placeholder="Name" [(ngModel)]="userData.father_name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Father's Religion</ion-label>
+          <ion-input placeholder="Religion" [(ngModel)]="userData.father_religion"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Father's Occupation</ion-label>
+          <ion-input placeholder="Occupation" [(ngModel)]="userData.father_job"></ion-input>
+        </ion-item>
+      </ion-item-group>
+
+      <ion-item-divider color="light"></ion-item-divider>
+
+      <ion-item-group>
+        <ion-item>
+          <ion-label floating>What are your hobbies during your free time?</ion-label>
+          <ion-input type="text" [(ngModel)]="userData.hobby"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Who help you in your studies?</ion-label>
+          <ion-input [(ngModel)]="userData.study_helper"></ion-input>
+        </ion-item>
+      </ion-item-group>
+
+      <ion-item-divider color="light"></ion-item-divider>
+      <ion-item-group>
+        <ion-item>
+          <ion-label text-wrap>Are you living with your parents?</ion-label>
+          <ion-checkbox color="twitter" [(ngModel)]="livingWithParents" (ionChange)="setLivingWithParents">
+          </ion-checkbox>
+        </ion-item>
+
+        <ion-item *ngIf="!livingWithParents">
+          <ion-label text-wrap>If not, why?</ion-label>
+          <ion-input [(ngModel)]="notLive"></ion-input>
+        </ion-item>
+      </ion-item-group>
+
+      <ion-item-divider color="light"></ion-item-divider>
+
+      <ion-item-group>
+        <ion-item>
+          <ion-label text-wrap>Are you allowed to go out during night </ion-label>
+          <ion-checkbox color="twitter" [(ngModel)]="allowedDuringNight"></ion-checkbox>
+        </ion-item>
+
+        <ion-item *ngIf="allowedDuringNight">
+          <ion-label text-wrap>How often?</ion-label>
+          <ion-input [(ngModel)]="allowed"></ion-input>
+        </ion-item>
+      </ion-item-group>
+      <ion-item-divider color="light"></ion-item-divider>
+
+      <ion-item-group>
+        <ion-item>
+          <ion-label text-wrap>Do you have any friends in school? </ion-label>
+          <ion-checkbox color="twitter" [(ngModel)]="haveFriends">
+          </ion-checkbox>
+        </ion-item>
+      </ion-item-group>
+    </ion-list>
+
+
+  </div>
+
+
+
+</ion-content>

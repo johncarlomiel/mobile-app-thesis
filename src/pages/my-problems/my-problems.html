@@ -1,0 +1,46 @@
+<!--
+  Generated template for the MyProblemsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar color="twitter">
+    <ion-buttons left>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      Personal Problems
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="center">
+
+    <button ion-button round outline (click)="presentProblemModal()" color="twitter">
+      <ion-icon slot="start" name="create" margin-right></ion-icon>
+      Update Now
+    </button>
+
+    <ion-item lines="none" *ngIf="!isProblemsUpdated">
+      <ion-label text-wrap>
+        <h2 style="text-align:center">Update your problems using the button above</h2>
+      </ion-label>
+    </ion-item>
+  </div>
+
+
+  <ion-item-group *ngFor="let singleProblem of userProblem" padding>
+    <ion-item-divider color="light">{{singleProblem.name}}</ion-item-divider>
+    <ion-item color="twitter" *ngFor="let maValue of singleProblem.questions" text-wrap no-lines>
+      <ion-icon name="quote" item-start></ion-icon>
+      {{maValue.label}}
+      <ion-icon name="quote" item-end></ion-icon>
+    </ion-item>
+  </ion-item-group>
+
+</ion-content>

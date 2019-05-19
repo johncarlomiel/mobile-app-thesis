@@ -1,0 +1,66 @@
+<!--
+  Generated template for the InvitationPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="twitter">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Invitations
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="welcome-card" *ngFor="let event of invitations">
+    <ion-card-content>
+
+      <img [src]="event.poster_url" (click)="viewPhoto(event.poster_url, event.name)">
+      <ion-card-header no-padding>
+        <ion-card-title>{{event.name}}</ion-card-title>
+
+      </ion-card-header>
+      <p> Location: {{event.location}} <br>
+        Date: {{event.date}}</p>
+
+      <ion-item no-padding>
+        <ion-label *ngIf="!event.seeMore">
+
+          <p style="white-space:pre-line">{{trim(event.description)}} <ion-note *ngIf="event.description.length > 45"
+              (click)="event.seeMore = true"><br>See
+              more</ion-note>
+          </p>
+        </ion-label>
+        <ion-label *ngIf="event.seeMore">
+
+          <p style="white-space:pre-line"> {{event.description}} <ion-note (click)="event.seeMore = false"><br>See
+              less</ion-note>
+          </p>
+        </ion-label>
+      </ion-item>
+
+
+      <ion-row>
+        <ion-col col-6>
+          <button ion-button icon-start clear small (click)="accept(event.event_id);">
+            <ion-icon [name]="'checkmark'"></ion-icon>
+            <div>Accept</div>
+          </button>
+        </ion-col>
+        <ion-col col-6>
+          <button ion-button icon-start clear small (click)="decline(event.event_id);">
+            <ion-icon name="close"></ion-icon>
+            <div>Decline</div>
+          </button>
+        </ion-col>
+      </ion-row>
+
+    </ion-card-content>
+
+
+  </ion-card>
+</ion-content>

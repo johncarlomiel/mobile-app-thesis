@@ -1,0 +1,26 @@
+<ion-content padding>
+  <div class="center" style="margin-bottom:2%;">
+    <img src="assets/icon/icon.png" alt="">
+  </div>
+  <ion-label color="primary">
+    <h1 class="center bolder">GC Career Guidance App</h1>
+  </ion-label>
+  <ion-item color="light">
+    <ion-label floating class="primary bolder" color="primary">Username</ion-label>
+    <ion-input #username></ion-input>
+  </ion-item>
+
+  <ion-item color="light">
+    <ion-label floating class="primary bolder" color="primary">Password</ion-label>
+    <ion-input type="password" #password></ion-input>
+  </ion-item>
+
+
+
+  <div class="center" margin>
+    <button ion-button round outline icon-end (click)="login(username.value, password.value)">
+      Login
+      <ion-icon slot="end" name="log-in"></ion-icon>
+    </button>
+  </div>
+</ion-content>

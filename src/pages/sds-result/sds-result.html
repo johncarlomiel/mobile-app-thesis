@@ -1,0 +1,39 @@
+<!--
+  Generated template for the SdsResultPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="twitter">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      SDS Result
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-label color="danger" *ngIf="userCodes.length == 0" text-wrap>
+    <h2 class="center bolder">SDS Examination still not taken</h2>
+  </ion-label>
+
+  <ion-list *ngFor="let singleCode of userCodes">
+    <ion-list-header>
+      <ion-label>
+        <h2 class="primary bolder">{{singleCode.name}}</h2>
+      </ion-label>
+    </ion-list-header>
+
+    <ion-item *ngFor="let code of singleCode.result">
+      <ion-label>
+        <h3 class="primary bolder">{{code.occupation}}</h3>
+        <p>{{code.description}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

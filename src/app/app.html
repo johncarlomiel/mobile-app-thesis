@@ -1,0 +1,30 @@
+<ion-menu [content]="content" (ionOpen)="refreshUserData();">
+  <ion-header>
+    <ion-toolbar color="twitter">
+      <ion-item *ngIf="user_data" color="twitter" no-lines>
+        <ion-avatar item-start>
+          <img src="{{user_data.dp_path}}">
+        </ion-avatar>
+        <h2>{{user_data.name}}</h2>
+      </ion-item>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content padding id="main">
+    <ion-list>
+      <ion-item no-lines color="twitter" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        <ion-icon name="{{p.icon}}" item-start></ion-icon>
+        {{p.title}}
+      </ion-item>
+
+      <ion-item no-lines color="twitter" menuClose ion-item (click)="logout();">
+        <ion-icon name="log-out" item-start></ion-icon>
+        Logout
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
