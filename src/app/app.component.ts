@@ -21,6 +21,8 @@ import { UserProgressProvider } from '../providers/user-progress/user-progress';
 import { LocalNotifications, ILocalNotificationActionType } from '@ionic-native/local-notifications';
 import { InvitationProvider } from '../providers/invitation/invitation';
 import { MessagesModalPage } from '../pages/messages-modal/messages-modal';
+
+import { timer } from "rxjs/observable/timer";
 @Component({
   templateUrl: 'app.html'
 })
@@ -34,6 +36,7 @@ export class MyApp {
   isQualified = false;
   showSplash = true;
   contacts: any;
+
   pages: Array<{ title: string, component: any, icon: string }>;
 
   constructor(
@@ -64,14 +67,7 @@ export class MyApp {
       { title: 'Invitations', component: InvitationPage, icon: "notifications" },
     ];
 
-    this.storage.get("isSlidesSeen").then((isSeen) => {
-      console.log(isSeen)
-      if (isSeen) {
-        this.rootPage = LoginPage
-      } else {
-        this.rootPage = LandingPage
-      }
-    }).catch(err => console.error(err));
+
 
 
   }
@@ -94,6 +90,18 @@ export class MyApp {
       this.splashScreen.hide();
 
 
+
+      timer(3000).subscribe(() => {
+        this.showSplash = false
+        this.storage.get("isSlidesSeen").then((isSeen) => {
+          console.log(isSeen)
+          if (isSeen) {
+            this.rootPage = LoginPage
+          } else {
+            this.rootPage = LandingPage
+          }
+        }).catch(err => console.error(err));
+      })
 
 
 

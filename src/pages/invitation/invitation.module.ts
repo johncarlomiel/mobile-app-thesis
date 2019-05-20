@@ -3,11 +3,6 @@ import { IonicPageModule } from 'ionic-angular';
 import { InvitationPage } from './invitation';
 
 @NgModule({
-  declarations: [
-    InvitationPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(InvitationPage),
-  ],
+
 })
-export class InvitationPageModule {}
+export class InvitationPageModule { }

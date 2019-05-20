@@ -15,7 +15,7 @@ import { CommentProvider } from '../../providers/comment/comment';
   templateUrl: 'comment-edit-modal.html',
 })
 export class CommentEditModalPage {
-  commentInfo: { any };
+  commentInfo: any;
   eventInfo;
   constructor(
     public navCtrl: NavController,

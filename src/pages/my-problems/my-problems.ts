@@ -20,6 +20,7 @@ import { UserProvider } from '../../providers/user/user';
 })
 export class MyProblemsPage {
   userProblem: any;
+  isLoaded = false;
   problem: any;
   labelArray: any;
   problemTitle: any;
@@ -121,7 +122,7 @@ export class MyProblemsPage {
 
         });
         console.log(this.containerProblem)
-
+        this.isLoaded = true;
 
 
 

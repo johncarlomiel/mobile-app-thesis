@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, PopoverController, ToastController, ViewController } from 'ionic-angular';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { IonicPage, NavController, NavParams, ModalController, PopoverController, ToastController, ViewController, AlertController } from 'ionic-angular';
 import { LikeProvider } from '../../providers/like/like';
 import { CommentProvider } from '../../providers/comment/comment';
 import { CommentPopoverPage } from '../comment-popover/comment-popover';
 import * as date_fns from 'date-fns';
 import { Storage } from '@ionic/storage';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { config } from '../../config/config';
 /**
  * Generated class for the EventModalPage page.
  *
@@ -20,18 +22,22 @@ import { Storage } from '@ionic/storage';
 export class EventModalPage {
   eventInfo: any;
   userData: any;
+  @ViewChild("message") messageBox: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private modalController: ModalController,
+    private alertController: AlertController,
     private likeService: LikeProvider,
     private storage: Storage,
     private commentService: CommentProvider,
     private popoverController: PopoverController,
     private toastController: ToastController,
-    private viewController: ViewController
+    private viewController: ViewController,
+    private socialSharing: SocialSharing
   ) {
     this.eventInfo = this.navParams.get("eventInfo");
+    console.log(this.eventInfo)
     this.storage.get("user_data").then((userData) => {
       this.userData = userData;
       console.log(this.userData)
@@ -41,6 +47,12 @@ export class EventModalPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventModalPage');
 
+  }
+
+  share(event) {
+    this.socialSharing.shareViaFacebookWithPasteMessageHint(event.description, event.poster_url, config.ip + "/public/index.html?id=" + event.event_id, event.name).then((val) => {
+
+    }).catch((err) => console.log(err))
   }
   return() {
 
@@ -57,6 +69,10 @@ export class EventModalPage {
 
   sendComment(event, comment) {
     this.commentService.sendComment(event.event_id, this.userData.id, comment);
+    this.presentToast("Comment Added");
+    console.log(this.messageBox);
+    this.messageBox.value = "";
+
   }
 
   async showPopover(comment, event) {

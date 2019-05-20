@@ -11,6 +11,8 @@ import { EventModalPage } from '../event-modal/event-modal';
 import * as date_fns from "date-fns";
 
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { config } from '../../config/config';
+import { SocialSharing } from '@ionic-native/social-sharing';
 /**
  * Generated class for the EventsPage page.
  *
@@ -39,7 +41,8 @@ export class EventsPage {
     private likeProvider: LikeProvider,
     private commentProvider: CommentProvider,
     private modalController: ModalController,
-    private fb: Facebook
+    private fb: Facebook,
+    private socialSharing: SocialSharing
   ) {
     console.log(this.notif)
     this.getEvents();
@@ -166,27 +169,9 @@ export class EventsPage {
   }
 
   share(event) {
-    this.fb.login(['public_profile', 'user_friends', 'email', 'user_posts', 'user_photos'])
-      .then((res: FacebookLoginResponse) => {
-        console.log('Logged into Facebook!', res)
-        alert(JSON.stringify(res))
-        this.storage.set("fbToken", res.authResponse.accessToken);
-        let option = {
-          method: 'share',
-          href: 'http://localhost:8080/public/index.html?id=' + event.event_id,
-          caption: 'Such caption, very feed.',
-          description: 'Much description',
-          picture: `${event.poster_url}`
-        }
-        alert(JSON.stringify(option))
-        this.fb.showDialog(option).then((val) => {
-          alert(JSON.stringify(val));
-        }).catch((err) => alert(JSON.stringify(err)));
+    this.socialSharing.shareViaFacebookWithPasteMessageHint(event.description, event.poster_url, config.ip + "/public/index.html?id=" + event.event_id, event.name).then((val) => {
 
-      })
-      .catch(e => {
-        alert(JSON.stringify(e))
-      });
+    }).catch((err) => console.log(err))
   }
 
 

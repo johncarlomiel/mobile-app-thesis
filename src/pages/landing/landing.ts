@@ -29,5 +29,8 @@ export class LandingPage {
       this.navCtrl.setRoot(LoginPage);
     });
   }
+  end() {
+    alert("end")
+  }
 
 }

@@ -21,8 +21,8 @@ import { UserProvider } from '../providers/user/user';
 import { FormsModule } from "@angular/forms";
 import { MyProblemsPage } from '../pages/my-problems/my-problems';
 import { MyProblemsModalPage } from '../pages/my-problems-modal/my-problems-modal';
-import { AboutMeModalPage } from '../pages/about-me-modal/about-me-modal';
 import { AboutMePage } from '../pages/about-me/about-me';
+import { AboutMeModalPage } from '../pages/about-me-modal/about-me-modal';
 
 // Natives
 import { File } from "@ionic-native/file";
@@ -31,6 +31,7 @@ import { FileTransfer } from "@ionic-native/file-transfer";
 import { PhotoViewer } from "@ionic-native/photo-viewer";
 import { Camera } from "@ionic-native/camera";
 import { LocalNotifications } from "@ionic-native/local-notifications";
+import { SocialSharing } from "@ionic-native/social-sharing";
 
 import { EFormPage } from '../pages/e-form/e-form';
 import { SdsResultPage } from '../pages/sds-result/sds-result';
@@ -56,20 +57,20 @@ import { Facebook } from "@ionic-native/facebook";
     LandingPage,
     LoginPage,
     MyInfoPage,
-    MyInfoModalPage,
     MyProblemsPage,
-    MyProblemsModalPage,
     AboutMeModalPage,
     AboutMePage,
     EFormPage,
     SdsResultPage,
-    EventModalPage,
     CommentPopoverPage,
     EventsPage,
-    CommentEditModalPage,
-    MessagesModalPage,
     ContactsPage,
     InvitationPage,
+    MyInfoModalPage,
+    MyProblemsModalPage,
+    EventModalPage,
+    CommentEditModalPage,
+    MessagesModalPage,
   ],
   imports: [
     BrowserModule,
@@ -86,20 +87,20 @@ import { Facebook } from "@ionic-native/facebook";
     LandingPage,
     LoginPage,
     MyInfoPage,
-    MyInfoModalPage,
     MyProblemsPage,
-    MyProblemsModalPage,
     AboutMeModalPage,
     AboutMePage,
     EFormPage,
     SdsResultPage,
-    EventModalPage,
     CommentPopoverPage,
     EventsPage,
+    ContactsPage,
+    InvitationPage,
+    MyProblemsModalPage,
+    EventModalPage,
     CommentEditModalPage,
     MessagesModalPage,
-    ContactsPage,
-    InvitationPage
+    MyInfoModalPage,
   ],
   providers: [
     StatusBar,
@@ -119,7 +120,8 @@ import { Facebook } from "@ionic-native/facebook";
     UserProgressProvider,
     InvitationProvider,
     LocalNotifications,
-    Facebook
+    Facebook,
+    SocialSharing
 
 
   ]

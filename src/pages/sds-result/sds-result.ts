@@ -17,6 +17,7 @@ import { UserProvider } from '../../providers/user/user';
 })
 export class SdsResultPage {
   userCodes = Array.apply(null, Array());
+  isLoaded = false;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -27,6 +28,7 @@ export class SdsResultPage {
       this.userProvider.getUserCode(authToken).subscribe((successData) => {
         this.userCodes = successData;
         console.log(this.userCodes)
+        this.isLoaded = true;
       }, (error) => { console.log(error) });
 
     }).catch((error) => console.log(error))
