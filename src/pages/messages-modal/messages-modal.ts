@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, NgZone } from '@angular/core';
 import { NavController, NavParams, InfiniteScroll, } from "ionic-angular";
 import { IonicPage, Content, Platform, ModalController, ViewController } from 'ionic-angular';
 import { AuthProvider } from './../../providers/auth/auth';
@@ -34,6 +34,7 @@ export class MessagesModalPage {
   isLoading = true;
   limit = 10;
   isNew = false;
+  isContentOnBottom = false;
   currentDataLength = 10;
 
   mutationObserver: MutationObserver;
@@ -47,7 +48,8 @@ export class MessagesModalPage {
     private authService: AuthProvider,
     private localNotifications: LocalNotifications,
     private platform: Platform,
-    private viewController: ViewController
+    private viewController: ViewController,
+    public zone: NgZone
   ) {
 
     this.contact_user_id = this.navParams.get("contact_user_id");
@@ -60,26 +62,27 @@ export class MessagesModalPage {
   }
 
   ionViewDidLoad() {
+
     console.log('ionViewDidLoad MessagesModalPage');
     this.seenAllMessages();
     this.storage.get("Authorization").then((val) => {
       this.chatService.getNewMessages().subscribe((msgs) => {
-        this.chatService.getMessages(val, this.contact_user_id, this.convo_name, this.limit).subscribe((response) => {
-          this.isLoading = true;
+        console.log(msgs)
+        this.isLoading = true;
 
-          this.currentDataLength = response.length;
-          this.messages = response.reverse();
-          if (!!this.content) {
-            console.log("Scrolling to bottom")
-            this.content.scrollToBottom(0);
+        this.currentDataLength = msgs.length;
+        this.messages.push(msgs)
+        setTimeout(() => {
+          if (this.messages[this.messages.length - 1].id === this.user_data.id) {
+            this.scollToBottom();
           }
-          setTimeout(() => {
+          this.isLoading = false;
+          console.log("loading now functioning")
+        }, 500)
+        // console.log(msgs)
+        // this.chatService.getMessages(val, this.contact_user_id, this.convo_name, this.limit).subscribe((response) => {
 
-            this.isLoading = false;
-            console.log("loading now functioning")
-          }, 500)
-          // console.log(msgs)
-        }, err => console.error(err));
+        // }, err => console.error(err));
 
         // this.isLoading = true;
 
@@ -120,14 +123,10 @@ export class MessagesModalPage {
 
   ionViewDidEnter() {
     console.log("loaded")
-    this.content.scrollToBottom(0).then((data) => this.isLoading = false).catch((err) => console.log("error"))
 
 
   }
-  ionViewWillEnter(): void {
 
-
-  }
   setSound() {
     if (this.platform.is('android')) {
       return 'file://assets/sounds/shame.mp3'
@@ -146,7 +145,7 @@ export class MessagesModalPage {
   }
 
   loadData(event) {
-
+    console.log(this.currentDataLength)
     this.scroller = event;
     if (!this.isLoading) {
       if (this.limit <= this.currentDataLength) {
@@ -173,7 +172,27 @@ export class MessagesModalPage {
     }
   }
 
+  ionScrollEnd() {
+    this.zone.run(() => {
+      if ((this.content.getContentDimensions().contentHeight + this.content.getContentDimensions().scrollTop) == this.content.getContentDimensions().scrollHeight) {
+        this.isContentOnBottom = true;
+      } else {
+        this.isContentOnBottom = false;
+      }
+      console.log(this.isContentOnBottom)
+    })
+  }
+
+  scollToBottom() {
+    try {
+      this.content.scrollToBottom(0);
+      this.isContentOnBottom = true;
+    } catch (error) {
+
+    }
+  }
   getMessages() {
+    this.isLoading = true;
     this.isNew = true;
     this.storage.get("Authorization").then((authToken) => {
       this.chatService.getMessages(authToken, this.contact_user_id, this.convo_name, this.limit)
@@ -182,7 +201,12 @@ export class MessagesModalPage {
           this.currentDataLength = successData.length;
           console.log(this.messages_storage)
           this.messages = successData.reverse();
-          setTimeout(() => this.isNew = false, 500)
+          setTimeout(() => {
+            this.isNew = false;
+            this.scollToBottom();
+            console.log(this.content.getContentDimensions())
+            this.isLoading = false;
+          }, 500)
         }, (error) => console.log(error));
     }).catch((err) => console.log(err))
   }
@@ -197,6 +221,7 @@ export class MessagesModalPage {
   }
 
   convertDate(date) {
+
     return date_fns.format(date, 'MMMM Do YYYY hh:mm A');
   }
   processDate(date, index) {

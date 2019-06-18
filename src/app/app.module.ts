@@ -32,6 +32,7 @@ import { PhotoViewer } from "@ionic-native/photo-viewer";
 import { Camera } from "@ionic-native/camera";
 import { LocalNotifications } from "@ionic-native/local-notifications";
 import { SocialSharing } from "@ionic-native/social-sharing";
+import { InAppBrowser } from "@ionic-native/in-app-browser";
 
 import { EFormPage } from '../pages/e-form/e-form';
 import { SdsResultPage } from '../pages/sds-result/sds-result';
@@ -121,7 +122,8 @@ import { Facebook } from "@ionic-native/facebook";
     InvitationProvider,
     LocalNotifications,
     Facebook,
-    SocialSharing
+    SocialSharing,
+    InAppBrowser
 
 
   ]

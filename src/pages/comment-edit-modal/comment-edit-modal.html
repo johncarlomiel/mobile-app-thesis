@@ -14,7 +14,7 @@
 
     <ion-title>Edit Comment</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="submitEdit(commentVal.value);">
+      <button class="font-bold" ion-button (click)="submitEdit(commentVal.value);">
         SAVE
       </button>
     </ion-buttons>
@@ -23,7 +23,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-item lines="full" color="twitter" no-padding>
+  <ion-item lines="full" color="secondary" no-padding>
     <ion-textarea placeholder="Your comment" value="{{commentInfo.comment}}" #commentVal></ion-textarea>
   </ion-item>
 </ion-content>

@@ -13,7 +13,7 @@
     </ion-buttons>
     <ion-title>My Problems</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="next()">
+      <button class="font-bold" ion-button (click)="next()">
         Next
       </button>
     </ion-buttons>
@@ -21,7 +21,7 @@
 
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="bg-color">
 
   <div class="progress-outer">
     <div class="progress-inner" [style.width]="progress + '%'">
@@ -29,15 +29,15 @@
     </div>
   </div>
   <div *ngIf="problems">
-    <ion-card color="twitter">
+    <ion-card color="secondary">
       <ion-card-header>
-        <ion-card-title text-wrap>{{problems[currentIndex].name}}</ion-card-title>
+        <ion-card-title text-wrap class="font-bold">{{problems[currentIndex].name}}</ion-card-title>
       </ion-card-header>
 
       <ion-card-content>
-        <ion-item color="twitter" no-lines
+        <ion-item class="item item-trns" no-lines
           *ngFor="let indivProblem of problems[currentIndex].questions; let childIndex = index;">
-          <ion-label text-wrap>{{indivProblem.label}}</ion-label>
+          <ion-label text-wrap class="font-regular">{{indivProblem.label}}</ion-label>
           <ion-checkbox end [(ngModel)]="indivProblem.value"></ion-checkbox>
         </ion-item>
       </ion-card-content>

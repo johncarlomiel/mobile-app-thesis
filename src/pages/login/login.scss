@@ -1,6 +1,15 @@
-page-login {
+    
 
+page-login {
+   div > img {
+      height: 80%;
+      width: 80%;
+   }
 }
 .center{
    text-align: center;
+}
+h1{
+   font-family: 'Montserrat-Black' !important;
+   color: map-get($colors, primary);
 }

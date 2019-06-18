@@ -1,23 +1,38 @@
 <ion-slides pager>
 
+
+
+  <ion-slide padding>
+    <div class="slide-content">
+      <img src="assets/landing-img/transition.png">
+      <h2>Career Assessment</h2>
+      <p>Take a 10 minutes Career Assessment that matches your aspirations, activities, and talents to the career
+        choices and educational opportunities that fit you best.</p>
+    </div>
+
+  </ion-slide>
+
   <ion-slide padding>
     <!-- <ion-img src="assets/icon/chat.png"></ion-img>
      -->
-    <img src="assets/icon/chat.png" alt="" srcset="">
-    <h2>Chat</h2>
-    <p>Interact with counselors about your problems</p>
+    <div class="slide-content">
+      <img src="assets/landing-img/chat.png" alt="" srcset="">
+      <h2>Chat</h2>
+      <p>A real-time messaging system built for interaction between students and counselors.</p>
+    </div>
+
+
   </ion-slide>
 
   <ion-slide padding>
-    <img src="assets/icon/calendar.png" alt="">
-    <h2>Events / Seminars</h2>
-    <p>Attend events or seminars conducted by professional counselors</p>
+    <div class="slide-content">
+      <img src="assets/landing-img/event.png" alt="">
+      <h2>Events</h2>
+      <p>Attend events conducted by professional counselors on Gordon College.</p>
+      <button ion-button (click)="login();" color="primary">Try it
+        now!</button>
+    </div>
   </ion-slide>
 
-  <ion-slide padding>
-    <img src="assets/icon/smile.png">
-    <h2>Face your problems with a smile</h2>
-    <button ion-button (click)="login();" color="light">Try it now!</button>
-  </ion-slide>
 
 </ion-slides>

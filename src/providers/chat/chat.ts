@@ -97,14 +97,17 @@ export class ChatProvider {
     });
   }
 
-  getContacts(token) {
+  getContacts(token, limit) {
+    console.log(limit)
     const url = this.IP + "/user/contacts";
+    const params = new HttpParams().set("limit", limit);
     const httpOptions = {
       headers: new HttpHeaders({
         'authorization': token,
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'
       }),
+      params
     }
     return this.http.get<Contacts[]>(url, httpOptions);
 

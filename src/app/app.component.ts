@@ -23,6 +23,8 @@ import { InvitationProvider } from '../providers/invitation/invitation';
 import { MessagesModalPage } from '../pages/messages-modal/messages-modal';
 
 import { timer } from "rxjs/observable/timer";
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { AuthProvider } from '../providers/auth/auth';
 @Component({
   templateUrl: 'app.html'
 })
@@ -49,7 +51,9 @@ export class MyApp {
     private localNotifications: LocalNotifications,
     private modalController: ModalController,
     private invitationService: InvitationProvider,
-    private zone: NgZone
+    private iab: InAppBrowser,
+    private zone: NgZone,
+    private authProvider: AuthProvider
   ) {
     this.initializeApp();
     this.storage.keys().then((keys) => {
@@ -57,19 +61,28 @@ export class MyApp {
     });
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'My Information', component: MyInfoPage, icon: "information" },
-      { title: 'My Problems', component: MyProblemsPage, icon: "quote" },
-      { title: 'About Me', component: AboutMePage, icon: "quote" },
-      { title: 'Enrollment Form', component: EFormPage, icon: "camera" },
-      { title: 'SDS Result', component: SdsResultPage, icon: "school" },
-      { title: 'Contacts', component: ContactsPage, icon: "contacts" },
       { title: 'Events', component: EventsPage, icon: "calendar" },
       { title: 'Invitations', component: InvitationPage, icon: "notifications" },
+      { title: 'Chat a counselor', component: ContactsPage, icon: "contacts" },
+      { title: 'SDS Result', component: SdsResultPage, icon: "school" },
+      { title: 'Enrollment Form', component: EFormPage, icon: "camera" },
+      { title: 'About Me', component: AboutMePage, icon: "quote" },
+      { title: 'My Problems', component: MyProblemsPage, icon: "quote" },
+      { title: 'My Information', component: MyInfoPage, icon: "information" },
     ];
 
 
 
 
+  }
+
+  openFbPage() {
+    const browser = this.iab.create('https://www.facebook.com/GC-Career-Guidance-App-352551275361989');
+    browser.show();
+  }
+  openGcPage() {
+    const browser = this.iab.create('http://www.gordoncollege.edu.ph/v2/www/?z=MQ==&r=MTcyMzE4NjM5');
+    browser.show();
   }
 
   refreshUserData() {
@@ -81,7 +94,16 @@ export class MyApp {
       }
     });
   }
-
+  checkSlidesSeen() {
+    this.storage.get("isSlidesSeen").then((isSeen) => {
+      console.log(isSeen)
+      if (isSeen) {
+        this.rootPage = LoginPage
+      } else {
+        this.rootPage = LandingPage
+      }
+    }).catch(err => console.error(err));
+  }
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -93,14 +115,20 @@ export class MyApp {
 
       timer(3000).subscribe(() => {
         this.showSplash = false
-        this.storage.get("isSlidesSeen").then((isSeen) => {
-          console.log(isSeen)
-          if (isSeen) {
-            this.rootPage = LoginPage
+        this.storage.get("Authorization").then((authToken) => {
+          if (authToken != null) {
+
+            this.authProvider.checkSession(authToken).subscribe((successData) => {
+              console.log(successData);
+              this.nav.setRoot(EventsPage);
+            },
+              (error) => { this.checkSlidesSeen() });
           } else {
-            this.rootPage = LandingPage
+            this.checkSlidesSeen();
           }
-        }).catch(err => console.error(err));
+
+        }).catch((error) => { throw error });
+
       })
 
 
@@ -209,7 +237,7 @@ export class MyApp {
   }
 
   getNewMessagesForNotif(authToken) {
-    this.chatService.getContacts(authToken).subscribe((responseData) => {
+    this.chatService.getContacts(authToken, 0).subscribe((responseData) => {
       this.contacts = responseData;
       console.log(this.contacts)
 
@@ -258,7 +286,7 @@ export class MyApp {
 
 
   joinAllContactsRoom(authToken) {
-    this.chatService.getContacts(authToken).subscribe((responseData) => {
+    this.chatService.getContacts(authToken, 0).subscribe((responseData) => {
       //Join all of the conversion room for every contact user
       console.log(this.user_data);
       this.chatService.joinAllContactsRoom(responseData, this.user_data);
@@ -303,7 +331,7 @@ export class MyApp {
   logout() {
     // this.chatSocket.emit('logout', this.user_data.id);
     this.storage.get('Authorization').then((authToken) => {
-      this.chatService.getContacts(authToken).subscribe(async (contacts) => {
+      this.chatService.getContacts(authToken, 0).subscribe(async (contacts) => {
         try {
           let user_data = await this.storage.get("user_data");
           console.log(user_data);

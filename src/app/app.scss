@@ -14,7 +14,41 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+.item.item-trns {
+	border-color: rgba(0, 0, 0, 0);
+	background-color: rgba(0, 0, 0, 0);
+	color: white; 
+}
 
+.font-black{
+  font-family: 'Montserrat-Black' !important;
+}
+.font-bold{
+  font-family: 'Montserrat-Bold' !important;
+}
+.font-regular{
+  font-family: 'Montserrat' !important;
+}
+
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url(../assets/fonts/Montserrat/Montserrat-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: 'Montserrat-Bold';
+  src: url(../assets/fonts/Montserrat/Montserrat-Bold.ttf) format("truetype");
+}
+@font-face {
+  font-family: 'Montserrat-Black';
+  src: url(../assets/fonts/Montserrat/Montserrat-Black.ttf) format("truetype");
+}
+
+ion-content.bg-color .scroll-content{
+  background: #9F9FED;  /* fallback for old browsers */
+      background: -webkit-linear-gradient(to bottom,#CFDEF3,#9F9FED);  /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to bottom,#CFDEF3,#9F9FED); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 .scroll-content {
    padding-bottom: 0 !important;
 }
@@ -30,9 +64,21 @@
    height: 50px;
    border-radius: 50%;
  }
- ion-content#main .scroll-content{
-    background:#66a9e2 !important;
+
+
+ ion-content > .scroll-content{
+   background: white !important;
+ } 
+ ion-slides{
+   background:white !important;
  }
+ ion-content#main .scroll-content{
+    background:map-get($colors, secondary ) !important;
+ }
+ion-title{
+  font-family: 'Montserrat-Bold' !important;
+}
+
  
  .splash{
    position: absolute;
@@ -106,3 +152,9 @@
              transform: scale3D(0, 0, 1);
    } 
  }
+
+ 
+
+ 
+
+ 

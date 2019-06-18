@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="twitter">
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -7,12 +7,12 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-segment [(ngModel)]="page" color="twitter">
-    <ion-segment-button value="incoming">
+<ion-content padding class="bg-color">
+  <ion-segment [(ngModel)]="page">
+    <ion-segment-button value="incoming" style="font-family: 'Montserrat-Bold' !important;">
       Incoming Events
     </ion-segment-button>
-    <ion-segment-button value="past">
+    <ion-segment-button value="past" style="font-family: 'Montserrat-Bold' !important;">
       Past Events
     </ion-segment-button>
   </ion-segment>
@@ -20,32 +20,32 @@
   <div *ngIf="page == 'incoming'">
     <div *ngFor="let event of events; let i = index;">
 
-      <ion-card *ngIf="isFuture(event)">
-        <ion-item color="twitter">
+      <ion-card *ngIf="isFuture(event)" color="primary">
+        <ion-item color="primary">
           <ion-avatar item-start>
             <img src="assets/icon/icon.png">
           </ion-avatar>
-          <h2 style="color:white">{{event.name}}</h2>
-          <p>{{event.date}}</p>
+          <h2 style="color:white;" class="font-bold">{{event.name}}</h2>
+          <p class="font-regular">{{event.date}}</p>
         </ion-item>
 
         <img [src]="event.poster_url" style="width:100%;height:100%;" (click)="viewPhoto(event.poster_url, event.name)">
 
         <ion-row>
           <ion-col col-4>
-            <button ion-button icon-start clear small (click)="like(i)">
+            <button color="light" ion-button icon-start clear small (click)="like(i)">
               <ion-icon [name]="event.icon"></ion-icon>
               <div>{{event.likes_counter}}</div>
             </button>
           </ion-col>
           <ion-col col-4>
-            <button ion-button icon-start clear small (click)="goToEvent(event);">
+            <button color="light" ion-button icon-start clear small (click)="goToEvent(event);">
               <ion-icon name="text"></ion-icon>
               <div>{{event.comments_counter}}</div>
             </button>
           </ion-col>
           <ion-col col-4>
-            <button ion-button icon-start clear small (click)="share(event);">
+            <button color="light" ion-button icon-start clear small (click)="share(event);">
               <ion-icon name="paper-plane"></ion-icon>
               <div>Share</div>
             </button>
@@ -61,13 +61,13 @@
 
     <div *ngFor="let event of events;let i = index;">
 
-      <ion-card *ngIf="isPast(event)">
-        <ion-item color="twitter">
+      <ion-card *ngIf="isPast(event)" color="primary">
+        <ion-item color="primary">
           <ion-avatar item-start>
             <img src="assets/icon/icon.png">
           </ion-avatar>
-          <h2 style="color:white;">{{event.name}}</h2>
-          <p>{{event.date}}</p>
+          <h2 class="font-bold" style="color:white;">{{event.name}}</h2>
+          <p class="font-regular">{{event.date}}</p>
         </ion-item>
 
         <img [src]="event.poster_url" style="width:100%;height:100%;" (click)="viewPhoto(event.poster_url, event.name)">
@@ -75,19 +75,19 @@
 
         <ion-row>
           <ion-col col-4>
-            <button ion-button icon-start clear small (click)="like(i)">
+            <button color="light" ion-button icon-start clear small (click)="like(i)">
               <ion-icon [name]="event.icon"></ion-icon>
               <div>{{event.likes_counter}}</div>
             </button>
           </ion-col>
           <ion-col col-4>
-            <button ion-button icon-start clear small (click)="goToEvent(event);">
+            <button color="light" ion-button icon-start clear small (click)="goToEvent(event);">
               <ion-icon name="text"></ion-icon>
               <div>{{event.comments_counter}}</div>
             </button>
           </ion-col>
           <ion-col col-4>
-            <button ion-button icon-start clear small (click)="share(event);">
+            <button color="light" ion-button icon-start clear small (click)="share(event);">
               <ion-icon name="paper-plane"></ion-icon>
               <div>Share</div>
             </button>

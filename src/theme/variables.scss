@@ -33,18 +33,24 @@ $text-input-placeholder-color:(#fff);
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
 
+$fab-mini-size:30px;
+$fab-content-margin:0px;
+$fab-list-margin:0px;
+
 $colors: (
-  primary:    #488aff,
-  secondary:  #32db64,
-  danger:     #f53d3d,
+  primary: #6435c9,
+  secondary: #9E7EE2,
+  danger:     #ff1654,
   light:      #f4f4f4,
   dark:       #222,
   tertiary: #7044ff,
   twitter: (
-    base: #55acee,
+    base: #6435c9,
     contrast: #ffffff
   )
 );
+
+
 
 
 // App iOS Variables

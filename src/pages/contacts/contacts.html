@@ -10,25 +10,27 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
-      Contacts
+      Chat
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content no-padding>
+<ion-content no-padding class="bg-color">
 
   <ion-list lines="none" *ngIf="contacts" no-padding>
-    <ion-item *ngFor="let user of contacts" (click)="messageModal(user.contact_user_id, user.convo_name, user.name)">
+    <ion-item color="{{user.user_id != user_data.id ? 'secondary': ''}}" *ngFor="let user of contacts"
+      (click)="messageModal(user.contact_user_id, user.convo_name, user.name)">
       <ion-avatar item-start>
         <img [src]="user.dp_path">
       </ion-avatar>
-      <h2> {{user.name}}</h2>
-      <p>{{user.recent_msg}}</p>
-      <ion-note style="font-size:.6em" item-end [ngClass]="{'online-text': user.isOnline}">
+      <h2 class="font-bold" style="text-transform: capitalize"> {{user.name}}</h2>
+      <p text-wrap class="font-regular">{{user.recent_msg}}</p>
+      <ion-note class="font-regular" style="font-size:.6em" item-end [ngClass]="{'online-text': user.isOnline}">
         {{user.isOnline ? 'Active Now' : durationLastOnline(user.last_online)}}
       </ion-note>
     </ion-item>
   </ion-list>
+
 
 
 </ion-content>

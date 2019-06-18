@@ -15,13 +15,13 @@
 
 </ion-header>
 
-<ion-content *ngIf="eventInfo">
+<ion-content *ngIf="eventInfo" class="bg-color">
 
 
-  <ion-card>
+  <ion-card color="primary">
     <img src="{{eventInfo.poster_url}}" (error)="errorImage()" />
     <ion-card-content>
-      <ion-card-title>
+      <ion-card-title class="font-bold">
         {{eventInfo.name}}
       </ion-card-title>
 
@@ -33,19 +33,20 @@
       </p>
       <ion-row>
         <ion-col col-4>
-          <button ion-button icon-start clear small (click)="like()">
+          <button color="light" ion-button icon-start clear small (click)="like()">
             <ion-icon [name]="eventInfo.icon"></ion-icon>
             <div>{{eventInfo.likes_counter}}</div>
           </button>
         </ion-col>
         <ion-col col-4>
-          <button ion-button icon-start clear small (click)="eventInfo.isCommentOpen = !eventInfo.isCommentOpen">
+          <button color="light" ion-button icon-start clear small
+            (click)="eventInfo.isCommentOpen = !eventInfo.isCommentOpen">
             <ion-icon name="text"></ion-icon>
             <div>{{eventInfo.comments_counter}}</div>
           </button>
         </ion-col>
         <ion-col col-4>
-          <button ion-button icon-start clear small (click)="share(eventInfo);">
+          <button class="font-bold" color="light" ion-button icon-start clear small (click)="share(eventInfo);">
             <ion-icon name="paper-plane"></ion-icon>
             <div>Share</div>
           </button>
@@ -62,20 +63,20 @@
 
 
 
-  <ion-list *ngIf="eventInfo.isCommentOpen">
+  <ion-list *ngIf="eventInfo.isCommentOpen" no-margin>
     <div *ngFor="let comment of eventInfo.comments">
-      <ion-item>
+      <ion-item color="secondary" no-margin no-lines>
         <ion-avatar item-start>
           <img [src]="comment.dp_path">
         </ion-avatar>
-        <h2>{{comment.name}}</h2>
-        <p text-wrap style="font-size:.8em">{{comment.comment}}</p>
+        <h2 class="font-bold">{{comment.name}}</h2>
+        <p text-wrap style="font-size:.8em" class="font-regular"> {{comment.comment}}</p>
 
-        <ion-note style="font-size:.6em" item-end>
+        <ion-note class="font-regular" color="light" style="font-size:.6em" item-end>
           {{durationLastOnline(comment.timestamp)}} ago
         </ion-note>
-        <button ion-button clear item-end icon-start small *ngIf="userData && comment.user_id == userData.id"
-          (click)="showPopover(comment, $event);">
+        <button color="light" ion-button clear item-end icon-start small
+          *ngIf="userData && comment.user_id == userData.id" (click)="showPopover(comment, $event);">
           <ion-icon name="more"></ion-icon>
         </button>
       </ion-item>
@@ -94,6 +95,7 @@
 <ion-footer>
   <ion-item *ngIf="eventInfo.isCommentOpen" color="twitter">
     <ion-input placeholder="Type a comment" #message></ion-input>
-    <button ion-button clear item-right (click)="sendComment(eventInfo, message.value)" color="light">Send</button>
+    <button ion-button clear item-right (click)="sendComment(eventInfo, message.value)" class="font-bold"
+      color="light">Send</button>
   </ion-item>
 </ion-footer>

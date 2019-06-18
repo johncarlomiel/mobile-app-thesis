@@ -15,23 +15,26 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding-top padding-bottom class="bg-color">
 
   <div class="content">
     <div class="center">
-      <button ion-button outline round color="twitter" (click)="presentInfoModal()">
+      <button class="font-bold" ion-button outline round color="twitter" (click)="presentInfoModal()">
         <ion-icon name="create" margin-right></ion-icon>
         Update Now
       </button>
     </div>
 
-    <ion-list>
-      <ion-item *ngFor="let eachInfo of info" style="background:whitesmoke">
+    <ion-item-group>
+      <ion-item *ngFor="let eachInfo of info" text-wrap no-lines>
         <ion-label text-wrap>
-          <p> <span class="primary bolder">{{eachInfo.label}}</span> : {{eachInfo.value}}</p>
+          <p class="font-regular"> <span class="font-bold" style="color:#6435c9">{{eachInfo.label}}</span> :
+            <span style="color:#9E7EE2">{{eachInfo.value}}</span></p>
         </ion-label>
       </ion-item>
-    </ion-list>
+    </ion-item-group>
+
+
   </div>
 
 </ion-content>

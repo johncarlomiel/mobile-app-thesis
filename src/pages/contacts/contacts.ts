@@ -21,6 +21,7 @@ export class ContactsPage {
   contacts = [];
   user_data: any;
   chatSocket: any;
+  contactsLimit = 10;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -44,12 +45,15 @@ export class ContactsPage {
 
   }
 
+
+
   getContacts() {
     this.storage.get("Authorization").then((authToken) => {
       this.authService.getPayload(authToken).subscribe((successData) => {
         this.user_data = successData;
         console.log(this.user_data)
-        this.chatService.getContacts(authToken).subscribe((successData) => {
+        console.log("Limit : " + this.contactsLimit)
+        this.chatService.getContacts(authToken, this.contactsLimit).subscribe((successData) => {
           console.log(successData);
           this.contacts = successData;
           //Join all of the conversion room for every contact user
@@ -103,7 +107,11 @@ export class ContactsPage {
     }).catch((err) => console.log(err))
   }
   durationLastOnline(date) {
-    return date_fns.distanceInWordsToNow(date);
+    if (date_fns.distanceInWordsToNow(date) != 'almost NaN years') {
+      return date_fns.distanceInWordsToNow(date);
+    } else {
+      return 'No record of online'
+    }
   }
 
 }

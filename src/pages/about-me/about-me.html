@@ -15,10 +15,10 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="bg-color">
   <div class="center">
 
-    <button color="twitter" ion-button round outline (click)="presentMoreInfoModal()">
+    <button class="font-bold" color="twitter" ion-button round outline (click)="presentMoreInfoModal()">
       <ion-icon slot="start" name="create" margin-right></ion-icon>
       Update About Me
     </button>
@@ -26,8 +26,8 @@
 
 
   <ion-item-group *ngFor="let info of moreInfo" padding>
-    <ion-item-divider color="light" text-wrap>{{info.label}}</ion-item-divider>
-    <ion-item color="twitter" text-wrap no-lines>
+    <ion-item-divider color="primary" text-wrap class="font-bold">{{info.label}}</ion-item-divider>
+    <ion-item class="font-regular" color="secondary" text-wrap no-lines>
       <ion-icon name="quote" item-start></ion-icon>
       {{info.value}}
       <ion-icon name="quote" item-end></ion-icon>

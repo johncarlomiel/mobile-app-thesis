@@ -15,19 +15,24 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="card-background-page">
+<ion-content padding class="card-background-page bg-color">
   <div class="center">
+
 
     <button color="twitter" ion-button round outline (click)="cameraStart()">
       <ion-icon slot="end" name="camera" margin-right></ion-icon>
       Update
     </button>
+    <ion-label text-wrap style="color:grey">
+      Note: Take a photo of the schedule on your enrollment form.
+    </ion-label>
   </div>
 
 
-  <ion-card *ngIf="!isImageLoading" (click)="viewImage(imageToShow)">
-    <img *ngIf="hasEform" src="{{imageToShow}}" />
-    <div class="card-title">Click the button above to update your e-form</div>
+  <ion-card *ngIf="!isImageLoading" (click)="viewImage(imageToShow)" color="secondary">
+    <img *ngIf="hasEform" [src]="isImageError ? defaultImage: imageToShow" (error)="errorImage();" />
+    <div class="card-title">
+      {{isImageError ? 'Image Failed to download': 'Click the button above to update your e-form'}}</div>
   </ion-card>
 
 </ion-content>

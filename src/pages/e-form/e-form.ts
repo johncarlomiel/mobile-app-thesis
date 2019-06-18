@@ -23,7 +23,9 @@ export class EFormPage {
   imageToShow: any;
   debugger: any;
   isImageLoading = false;
+  isImageError = false;
   hasEform = false;
+  defaultImage = "assets/images/defaults/not_found.jpg";
 
   constructor(
     public navCtrl: NavController,
@@ -40,6 +42,9 @@ export class EFormPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EFormPage');
+  }
+  errorImage() {
+    this.isImageError = true;
   }
 
   getEform() {

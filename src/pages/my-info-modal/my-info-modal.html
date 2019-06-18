@@ -5,15 +5,19 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-toolbar color="twitter">
+  <ion-toolbar color="twitter" class="ion-text-justify">
     <ion-buttons left>
       <button ion-button icon-only (click)="back();">
         <ion-icon name="arrow-round-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>General Information</ion-title>
+    <ion-title>
+      <div class="ion-text-justify">
+        General Information
+      </div>
+    </ion-title>
     <ion-buttons right>
-      <button ion-button (click)="submit(userData.name, userData.course, userData.age, userData.gender, userData.religion,
+      <button class="font-bold" ion-button (click)="submit(userData.name, userData.course, userData.age, userData.gender, userData.religion,
         userData.place_birth, userData.addr, userData.cp_num, userData.mother_name, userData.mother_religion, userData.mother_job,
        userData.father_name, userData.father_religion, userData.father_job, userData.study_status,
        userData.transpo, userData.hobby, userData.study_helper, userData.year)">SAVE</button>
@@ -22,65 +26,65 @@
 
 </ion-header>
 
-<ion-content>
+<ion-content no-padding>
   <div *ngIf="userData">
     <ion-list>
       <ion-item-group>
         <ion-item>
-          <ion-label floating>Full Name</ion-label>
+          <ion-label color="primary">Full Name:</ion-label>
           <ion-input [(ngModel)]="userData.name"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label floating>Age</ion-label>
+          <ion-label color="primary">Age:</ion-label>
           <ion-input type="number" maxlength="3" [(ngModel)]="userData.age"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label floating>Religion</ion-label>
+          <ion-label color="primary">Religion:</ion-label>
           <ion-input [(ngModel)]="userData.religion"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label floating>Place of Birth</ion-label>
+          <ion-label color="primary">Place of Birth:</ion-label>
           <ion-input [(ngModel)]="userData.place_birth"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label floating>Home Address</ion-label>
+          <ion-label color="primary">Home Address:</ion-label>
           <ion-textarea [(ngModel)]="userData.addr"></ion-textarea>
         </ion-item>
         <ion-item>
-          <ion-label floating>Contact No.</ion-label>
+          <ion-label color="primary">Contact No:</ion-label>
           <ion-input type="number" [(ngModel)]="userData.cp_num"></ion-input>
         </ion-item>
 
 
       </ion-item-group>
-      <ion-item-divider color="light"></ion-item-divider>
+      <ion-item-divider></ion-item-divider>
       <ion-item-group>
 
         <ion-item>
-          <ion-label>Year Level</ion-label>
-          <ion-select placeholder="Year Level" [(ngModel)]="userData.year">
+          <ion-label color="primary">Year Level:</ion-label>
+          <ion-select [(ngModel)]="userData.year">
             <ion-option *ngFor="let maYear of yearLevel" value="{{maYear}}">{{maYear}}</ion-option>
           </ion-select>
         </ion-item>
 
         <ion-item>
-          <ion-label>Course</ion-label>
-          <ion-select placeholder="Course" [(ngModel)]="userData.course">
+          <ion-label color="primary">Course:</ion-label>
+          <ion-select [(ngModel)]="userData.course">
             <ion-option *ngFor="let course of courses" value="{{course}}">{{course}}</ion-option>
           </ion-select>
         </ion-item>
 
         <ion-item>
-          <ion-label>Gender</ion-label>
-          <ion-select placeholder="Gender" [(ngModel)]="userData.gender">
+          <ion-label color="primary">Gender:</ion-label>
+          <ion-select [(ngModel)]="userData.gender">
             <ion-option value="Female">Female</ion-option>
             <ion-option value="Male">Male</ion-option>
           </ion-select>
         </ion-item>
 
         <ion-item>
-          <ion-label>How is your studies?</ion-label>
-          <ion-select placeholder="How is your studies?" [(ngModel)]="userData.study_status">
+          <ion-label color="primary">How is your studies?</ion-label>
+          <ion-select [(ngModel)]="userData.study_status">
             <ion-option value="very good">Very Good</ion-option>
             <ion-option value="good">Good</ion-option>
             <ion-option value="not so good">Not so good</ion-option>
@@ -90,8 +94,8 @@
 
 
         <ion-item>
-          <ion-label>How do you go to school?</ion-label>
-          <ion-select placeholder="How do you go to school?" [(ngModel)]="userData.transpo">
+          <ion-label color="primary">How do you go to school?</ion-label>
+          <ion-select [(ngModel)]="userData.transpo">
             <ion-option value="walking">Walking</ion-option>
             <ion-option value="jeepney">Jeepney</ion-option>
             <ion-option value="tricycle">Tricycle</ion-option>
@@ -101,57 +105,57 @@
 
       </ion-item-group>
 
-      <ion-item-divider color="light"></ion-item-divider>
+      <ion-item-divider></ion-item-divider>
       <ion-item-group>
         <ion-item>
-          <ion-label floating>Mother's Name</ion-label>
-          <ion-input placeholder="Name" [(ngModel)]="userData.mother_name"></ion-input>
+          <ion-label color="primary">Mother's Name:</ion-label>
+          <ion-input [(ngModel)]="userData.mother_name"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label floating>Mother's Religion</ion-label>
-          <ion-input placeholder="Religion" [(ngModel)]="userData.mother_religion"></ion-input>
+          <ion-label color="primary">Mother's Religion:</ion-label>
+          <ion-input [(ngModel)]="userData.mother_religion"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label floating>Mother's Occupation</ion-label>
-          <ion-input placeholder="Occupation" [(ngModel)]="userData.mother_job"></ion-input>
+          <ion-label color="primary">Mother's Occupation:</ion-label>
+          <ion-input [(ngModel)]="userData.mother_job"></ion-input>
         </ion-item>
       </ion-item-group>
 
-      <ion-item-divider color="light"></ion-item-divider>
+      <ion-item-divider></ion-item-divider>
 
       <ion-item-group>
         <ion-item>
-          <ion-label floating>Father's Name</ion-label>
-          <ion-input placeholder="Name" [(ngModel)]="userData.father_name"></ion-input>
+          <ion-label color="primary">Father's Name:</ion-label>
+          <ion-input [(ngModel)]="userData.father_name"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label floating>Father's Religion</ion-label>
-          <ion-input placeholder="Religion" [(ngModel)]="userData.father_religion"></ion-input>
+          <ion-label color="primary">Father's Religion:</ion-label>
+          <ion-input [(ngModel)]="userData.father_religion"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label floating>Father's Occupation</ion-label>
-          <ion-input placeholder="Occupation" [(ngModel)]="userData.father_job"></ion-input>
+          <ion-label color="primary">Father's Occupation:</ion-label>
+          <ion-input [(ngModel)]="userData.father_job"></ion-input>
         </ion-item>
       </ion-item-group>
 
-      <ion-item-divider color="light"></ion-item-divider>
+      <ion-item-divider></ion-item-divider>
 
       <ion-item-group>
         <ion-item>
-          <ion-label floating>What are your hobbies during your free time?</ion-label>
-          <ion-input type="text" [(ngModel)]="userData.hobby"></ion-input>
+          <ion-label floating color="primary" text-wrap>What are your hobbies during your free time?</ion-label>
+          <ion-textarea type="text" [(ngModel)]="userData.hobby"></ion-textarea>
         </ion-item>
 
         <ion-item>
-          <ion-label floating>Who help you in your studies?</ion-label>
-          <ion-input [(ngModel)]="userData.study_helper"></ion-input>
+          <ion-label floating color="primary" text-wrap>Who help you in your studies?</ion-label>
+          <ion-textarea [(ngModel)]="userData.study_helper"></ion-textarea>
         </ion-item>
       </ion-item-group>
 
-      <ion-item-divider color="light"></ion-item-divider>
+      <ion-item-divider></ion-item-divider>
       <ion-item-group>
         <ion-item>
-          <ion-label text-wrap>Are you living with your parents?</ion-label>
+          <ion-label text-wrap color="primary">Are you living with your parents?</ion-label>
           <ion-checkbox color="twitter" [(ngModel)]="livingWithParents" (ionChange)="setLivingWithParents">
           </ion-checkbox>
         </ion-item>
@@ -162,11 +166,11 @@
         </ion-item>
       </ion-item-group>
 
-      <ion-item-divider color="light"></ion-item-divider>
+      <ion-item-divider></ion-item-divider>
 
       <ion-item-group>
         <ion-item>
-          <ion-label text-wrap>Are you allowed to go out during night </ion-label>
+          <ion-label text-wrap color="primary">Are you allowed to go out during night?</ion-label>
           <ion-checkbox color="twitter" [(ngModel)]="allowedDuringNight"></ion-checkbox>
         </ion-item>
 
@@ -175,11 +179,11 @@
           <ion-input [(ngModel)]="allowed"></ion-input>
         </ion-item>
       </ion-item-group>
-      <ion-item-divider color="light"></ion-item-divider>
+      <ion-item-divider></ion-item-divider>
 
       <ion-item-group>
         <ion-item>
-          <ion-label text-wrap>Do you have any friends in school? </ion-label>
+          <ion-label text-wrap color="primary">Do you have any friends in school? </ion-label>
           <ion-checkbox color="twitter" [(ngModel)]="haveFriends">
           </ion-checkbox>
         </ion-item>

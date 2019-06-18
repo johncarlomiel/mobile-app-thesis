@@ -14,24 +14,39 @@
 
 <ion-menu [content]="content" (ionOpen)="refreshUserData();">
   <ion-header>
-    <ion-toolbar color="twitter">
-      <ion-item *ngIf="user_data" color="twitter" no-lines>
+    <ion-toolbar color="primary">
+      <ion-item *ngIf="user_data" color="primary" no-lines>
         <ion-avatar item-start>
           <img src="{{user_data.dp_path}}">
         </ion-avatar>
-        <h2>{{user_data.name}}</h2>
+        <h2 style="font-family: 'Montserrat-Black' !important">{{user_data.name}}</h2>
       </ion-item>
     </ion-toolbar>
   </ion-header>
 
   <ion-content padding id="main">
     <ion-list>
-      <ion-item no-lines color="twitter" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+      <ion-item color="secondary" no-lines menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         <ion-icon name="{{p.icon}}" item-start></ion-icon>
-        {{p.title}}
+        <ion-label>{{p.title}}</ion-label>
       </ion-item>
 
-      <ion-item no-lines color="twitter" menuClose ion-item (click)="logout();">
+
+
+
+      <hr style="background: white;">
+
+      <ion-item no-lines color="secondary" menuClose ion-item (click)="openFbPage();">
+        <ion-icon name="logo-facebook" item-start></ion-icon>
+        Facebook Page
+      </ion-item>
+
+      <ion-item no-lines color="secondary" menuClose ion-item (click)="openGcPage();">
+        <ion-icon name="help" item-start></ion-icon>
+        About Us
+      </ion-item>
+
+      <ion-item no-lines color="secondary" menuClose ion-item (click)="logout();">
         <ion-icon name="log-out" item-start></ion-icon>
         Logout
       </ion-item>

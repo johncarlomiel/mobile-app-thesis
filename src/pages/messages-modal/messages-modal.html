@@ -11,12 +11,12 @@
         <ion-icon name="arrow-round-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title *ngIf="contact_name">Chatting with {{contact_name}}</ion-title>
+    <ion-title *ngIf="contact_name" text-wrap>Chatting with {{contact_name}}</ion-title>
   </ion-toolbar>
 
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="bg-color" (ionScroll)="ionScrollEnd();">
   <ion-infinite-scroll *ngIf="!isLoading && messages.length >= 10" position="top" threshold="1%"
     (ionInfinite)="loadData($event)" #scroller>
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
@@ -31,18 +31,24 @@
       <div class="msg-detail">
         <div class="msg-info">
           <p>
-            <span
-              style="text-transform:capitalize;font-weight: bolder;color:cornflowerblue">{{message.name}}</span>&nbsp;&nbsp;&nbsp;{{convertDate(message.timestamp)}}
+            <span style="text-transform:capitalize;color:black"
+              class="font-black">{{message.name}}</span>&nbsp;&nbsp;&nbsp;<span
+              class="font-regular">{{convertDate(message.timestamp)}}</span>
           </p>
         </div>
         <div class="msg-content">
           <span class="triangle"></span>
-          <p class="line-breaker ">{{message.message}}</p>
+          <p class="line-breaker font-regular">{{message.message}}</p>
         </div>
       </div>
     </div>
 
   </div>
+  <ion-fab bottom center *ngIf="!isContentOnBottom">
+    <button ion-fab mini (click)="scollToBottom();">
+      <ion-icon name="arrow-round-down"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>
 
 <ion-footer>

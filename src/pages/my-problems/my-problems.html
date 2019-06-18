@@ -18,10 +18,10 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="bg-color">
   <div class="center">
 
-    <button ion-button round outline (click)="presentProblemModal()" color="twitter">
+    <button class="font-bold" ion-button round outline (click)="presentProblemModal()" color="primary">
       <ion-icon slot="start" name="create" margin-right></ion-icon>
       Update Now
     </button>
@@ -35,8 +35,8 @@
 
 
   <ion-item-group *ngFor="let singleProblem of userProblem" padding>
-    <ion-item-divider color="light">{{singleProblem.name}}</ion-item-divider>
-    <ion-item color="twitter" *ngFor="let maValue of singleProblem.questions" text-wrap no-lines>
+    <ion-item-divider color="primary" class="font-bold" text-wrap>{{singleProblem.name}}</ion-item-divider>
+    <ion-item color="secondary" class="font-regular" *ngFor="let maValue of singleProblem.questions" text-wrap no-lines>
       <ion-icon name="quote" item-start></ion-icon>
       {{maValue.label}}
       <ion-icon name="quote" item-end></ion-icon>
